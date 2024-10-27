@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using System.Security;
 
 public class SceneZoneEditor
 {
@@ -14,10 +13,7 @@ public class SceneZoneEditor
         // Add the SceneZone component or any other relevant component
         sceneZone.AddComponent<BoxCollider>();
         sceneZone.AddComponent<SceneZone>();
-        sceneZone.AddComponent<ZoneLink>();
-
-        // Ensure it gets positioned in the right place in the hierarchy
-        GameObjectUtility.SetParentAndAlign(sceneZone, menuCommand.context as GameObject);
+        sceneZone.AddComponent<ZoneLinks>();
 
         // Register the creation in the Undo system (to allow Undo in the editor)
         Undo.RegisterCreatedObjectUndo(sceneZone, "Create Scene Zone");
