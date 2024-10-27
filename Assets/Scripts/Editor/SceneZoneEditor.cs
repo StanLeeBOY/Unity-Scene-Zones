@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using System.Security.Policy;
+using System.Security;
 
 public class SceneZoneEditor
 {
