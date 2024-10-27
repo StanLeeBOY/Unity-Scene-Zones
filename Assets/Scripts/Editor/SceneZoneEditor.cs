@@ -14,7 +14,7 @@ public class SceneZoneEditor
         // Add the SceneZone component or any other relevant component
         sceneZone.AddComponent<BoxCollider>();
         sceneZone.AddComponent<SceneZone>();
-        sceneZone.AddComponent<ZoneLinks>();
+        sceneZone.AddComponent<ZoneLink>();
 
         // Ensure it gets positioned in the right place in the hierarchy
         GameObjectUtility.SetParentAndAlign(sceneZone, menuCommand.context as GameObject);
