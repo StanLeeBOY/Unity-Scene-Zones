@@ -6,7 +6,6 @@
   "displayName": "Scene Zones",
   "hideInEditor": false,
   "dependencies": {
-    "com.kybernetik.ultevents": "3.0.2"
   },
   "repository": {
     "type": "git",
