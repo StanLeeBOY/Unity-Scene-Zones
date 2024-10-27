@@ -1,7 +1,10 @@
 {
     "name": "SceneZones",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:57a6d82589ae03c4cabdc058f719f231",
+        "GUID:f7c292403b24ec84ba53c5459a94624b"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
