@@ -1,17 +1,23 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UltEvents;
+using System;
 
-[AddComponentMenu ("Zones/Zone Items/Zone Events")]
+[AddComponentMenu("Zones/Zone Items/Zone Events")]
 public class ZoneEvent : ZoneItem
 {
+    [Serializable]
+    public class ZoneEventCallback : UltEvent<GameObject>
+    {
+    }
+
+    [Space(5)]
     public bool Active = true;
-    public bool UseDelayedEvent = false;
-    public UltEvent OnZoneEnter;
-    public UltEvent OnZoneLeave;
+    [Space(2)]
+    public ZoneEventCallback OnZoneEnter;
+    [Space(2)]
+    public ZoneEventCallback OnZoneLeave;
     public List<ZoneEvent> LinkedEvents = new List<ZoneEvent>();
-    public SceneZone.TriggerOption triggerType;
-    public SceneZone.TriggerOption triggerOption;
 
     private ZoneLinks parentZoneLinks;
 
@@ -40,18 +46,18 @@ public class ZoneEvent : ZoneItem
     {
         if (parentZoneLinks != null && parentZoneLinks.currentZone == GetComponentInParent<SceneZone>())
         {
-            OnZoneEnter.Invoke();
-            Debug.Log("Primary trigger activated in current zone");
+            OnZoneEnter.Invoke(this.gameObject);
+            UnityEngine.Debug.Log("Primary trigger activated in current zone");
         }
     }
 
     private void OnSecondaryTrigger()
     {
-        OnZoneLeave.Invoke();
+        OnZoneLeave.Invoke(this.gameObject);
         foreach (var linkedEvent in LinkedEvents)
         {
             linkedEvent.Trigger(SceneZone.TriggerOption.SECONDARY);
         }
-        Debug.Log("Secondary trigger activated for linked zones");
+        UnityEngine.Debug.Log("Secondary trigger activated for linked zones");
     }
 }
