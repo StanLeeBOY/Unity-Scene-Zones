@@ -3,13 +3,12 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 
-[AddComponentMenu ("Zones/Scene Zone")]
+[AddComponentMenu("Zones/Scene Zone")]
 public class SceneZone : MonoBehaviour
 {
     public enum TriggerOption { PRIMARY, SECONDARY, PRIMARY_AND_SECONDARY }
 
     public LayerMask triggerLayers; // Layers for triggering
-    public string triggerTag = "Player";
     private List<ZoneItem> zoneItems;
     private ZoneLinks zoneLinks;
     public Color gizmoColor = Color.cyan;
@@ -45,25 +44,16 @@ public class SceneZone : MonoBehaviour
             return false;
         }
 
-        // Check if the tag matches
-        if (!string.IsNullOrEmpty(triggerTag) && !other.CompareTag(triggerTag))
-        {
-            return false;
-        }
-
-        // Check if the object or any of its ancestors up to the HexabodyPlayer is already triggered
+        // Check if the object has been triggered before
         Transform current = other.transform;
         while (current != null)
         {
-            if (current.CompareTag(triggerTag))
+            if (triggeredParents.Contains(current))
             {
-                if (triggeredParents.Contains(current))
-                {
-                    return false; // Already triggered
-                }
-                triggeredParents.Add(current);
-                return true;
+                return false; // Already triggered
             }
+            triggeredParents.Add(current);
+            return true;
             current = current.parent;
         }
 
