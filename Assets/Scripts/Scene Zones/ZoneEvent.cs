@@ -28,7 +28,7 @@ public class ZoneEvent : ZoneItem
 
     public override void Trigger(SceneZone.TriggerOption option)
     {
-        if (Active && option == triggerOption)
+        if (Active && option == SceneZone.TriggerOption.PRIMARY || option == SceneZone.TriggerOption.SECONDARY)
         {
             switch (option)
             {
