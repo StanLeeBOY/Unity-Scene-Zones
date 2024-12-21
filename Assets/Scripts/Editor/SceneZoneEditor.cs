@@ -5,13 +5,16 @@ public class SceneZoneEditor
 {
     // Add a "Scene Zone" entry in the GameObject menu (appears on right-click in Hierarchy)
     [MenuItem("GameObject/SDK/Zones/SceneZone", false, 10)]
-    static void CreateSceneZone(MenuCommand menuCommand)
+    static void CreateSceneZone(UnityEditor.MenuCommand menuCommand) // Explicit namespace
     {
         // Create a new GameObject for the Scene Zone
         GameObject sceneZone = new GameObject("Scene Zone");
 
-        // Add the SceneZone component or any other relevant component
-        sceneZone.AddComponent<BoxCollider>();
+        // Add a BoxCollider and configure it as a trigger
+        BoxCollider collider = sceneZone.AddComponent<BoxCollider>();
+        collider.isTrigger = true;
+
+        // Add other relevant components
         sceneZone.AddComponent<SceneZone>();
         sceneZone.AddComponent<ZoneLinks>();
 
@@ -21,5 +24,4 @@ public class SceneZoneEditor
         // Select the newly created object in the Hierarchy
         Selection.activeObject = sceneZone;
     }
-
 }
